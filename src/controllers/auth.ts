@@ -76,8 +76,8 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
                     return {};
                 }
                 if (isMatch) {
-                    const token = jwt.sign({existingUser}, SECRET, {
-                        expiresIn : 60 * 60 * 24 // 授权时效24小时
+                    const token = jwt.sign({data: existingUser}, SECRET, {
+                        expiresIn : 60 * 60 * 1  // 授权时效24小时
                       });
                     res.send({
                         code: 200,
@@ -101,3 +101,4 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
         }
     });
 };
+

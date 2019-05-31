@@ -1,13 +1,11 @@
 {
-  "name": "express-typescript-starter",
+  "name": "express-typescript-sample",
   "version": "0.1.0",
-  "description": "A starting point for Node.js express apps with TypeScript",
+  "description": "A Node.js apps with TypeScript",
   "repository": {
-    "type": "git",
-    "url": "https://github.com/Microsoft/TypeScript-Node-Starter"
+    "type": "git"
   },
-  "author": "Bowden Kelly",
-  "license": "MIT",
+  "author": "haopengzh",
   "scripts": {
     "start": "npm run serve",
     "build": "npm run build-ts && npm run tslint ",
