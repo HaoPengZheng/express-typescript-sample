@@ -7,7 +7,7 @@ const request = require("express-validator");
 export const getAllEassyList = (req: Request, res: Response, next: NextFunction) => {
     console.log(req);
     res.send({
-        req: 123
+        req: 123456
     });
 };
 
