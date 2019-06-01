@@ -29,6 +29,7 @@ export const signup = (req: Request, res: Response, next: NextFunction) => {
         password: req.body.password
     });
 
+    user.profile.picture = user.gravatar(200);
     User.findOne({ email: req.body.email }, (err, existingUser) => {
         if (err) { return next(err); }
         if (existingUser) {
@@ -102,3 +103,19 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
     });
 };
 
+/**
+ * Get /user
+ * Get userinfo
+ */
+export const userinfo = (req: Request, res: Response, next: NextFunction) => {
+    const userEmail = req.user.data.email;
+    User.findOne({email: userEmail}, (err: any, exitUser: UserDocument) => {
+        if (err) {
+            next(err);
+        }
+        res.send({
+            code: 200,
+            userInfo: exitUser
+        });
+    });
+};

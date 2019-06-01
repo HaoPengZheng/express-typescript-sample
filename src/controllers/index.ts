@@ -13,6 +13,7 @@ const initRoute = (app: any) => {
     // auth
     app.post("/signup", authController.signup);
     app.post("/login", authController.login);
+    app.get("/user", authController.userinfo);
     essayInitRoute(app);
 
 };
