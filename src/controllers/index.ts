@@ -2,7 +2,7 @@
 import * as authController from "./auth";
 const jwt = require("express-jwt");
 import { SECRET } from "../constant";
-const unlessPath = ["/people", "/signup", "/login"];
+const unlessPath = ["/people", "/signup", "/login", "/feed", {url: "/essay", methods: ["GET", "PUT"]}];
 import essayInitRoute from "./essay";
 const initRoute = (app: any) => {
     /**

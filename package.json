@@ -50,7 +50,8 @@
     "pug": "^2.0.3",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
-    "winston": "^2.4.0"
+    "winston": "^2.4.0",
+    "xmlbuilder": "^13.0.2"
   },
   "devDependencies": {
     "@types/async": "^2.0.45",

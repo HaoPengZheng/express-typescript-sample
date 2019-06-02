@@ -5,9 +5,9 @@ import { Request, Response, NextFunction } from "express";
 const jwt = require("jsonwebtoken");
 import { SECRET } from "../constant";
 const request = require("express-validator");
-
+import builder from "xmlbuilder";
 export const getAllEassyList = (req: Request, res: Response, next: NextFunction) => {
-    Essay.find({}, {isDelete: 0, _id: 0, }, (err: any, essayList: EssayDocument) => {
+    Essay.find({}, { isDelete: 0, _id: 0, }, (err: any, essayList: EssayDocument) => {
         res.send({
             essayList
         });
@@ -48,7 +48,33 @@ export const addEssay = (req: Request, res: Response, next: NextFunction) => {
 
 };
 
+/**
+ * Get: /feed
+ * @param req Request
+ * @param res Response
+ * @param next NextFunction
+ * @returns build a xml for rss subscription
+ */
+
+export const feed = (req: Request, res: Response, next: NextFunction) => {
+
+    const rss = builder.create("rss");
+    rss.att("version", "2.0");
+    const channel = rss.ele("channel");
+    for (let i = 1; i <= 5; i++) {
+        const item = channel.ele("item");
+        item.att("x", i);
+        item.att("y", i * i);
+        item.ele("title", {}, "菜鸟教程首页");
+        item.ele("link", {}, "http://www.runoob.com");
+        item.ele("description", {}, "免费编程教程");
+    }
+    const xml = rss.end({ pretty: true });
+    res.set("Content-type", "application/rss+xml").send(xml);
+};
+
 export default (app: any) => {
     app.get("/essay", getAllEassyList);
     app.post("/essay", addEssay);
+    app.get("/feed", feed);
 };
