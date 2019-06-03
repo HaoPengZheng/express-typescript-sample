@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 import { SECRET } from "../constant";
 const request = require("express-validator");
 import builder from "xmlbuilder";
+import { Express } from "express";
 export const getAllEassyList = (req: Request, res: Response, next: NextFunction) => {
     Essay.find({}, { isDelete: 0, _id: 0, }, (err: any, essayList: EssayDocument) => {
         res.send({
@@ -73,7 +74,7 @@ export const feed = (req: Request, res: Response, next: NextFunction) => {
     res.set("Content-type", "application/rss+xml").send(xml);
 };
 
-export default (app: any) => {
+export default (app: Express) => {
     app.get("/essay", getAllEassyList);
     app.post("/essay", addEssay);
     app.get("/feed", feed);

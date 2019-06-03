@@ -130,19 +130,9 @@ export let getAccount = (req: Request, res: Response) => {
  * Update profile information.
  */
 export let postUpdateProfile = (req: Request, res: Response, next: NextFunction) => {
-  req.assert("email", "Please enter a valid email address.").isEmail();
-  req.sanitize("email").normalizeEmail({ gmail_remove_dots: false });
-
-  const errors = req.validationErrors();
-
-  if (errors) {
-    req.flash("errors", errors);
-    return res.redirect("/account");
-  }
-
-  User.findById(req.user.id, (err, user: UserDocument) => {
+  const userEmail = req.user.data.email;
+  User.findOne({email: userEmail}, (err, user: UserDocument) => {
     if (err) { return next(err); }
-    user.email = req.body.email || "";
     user.profile.name = req.body.name || "";
     user.profile.gender = req.body.gender || "";
     user.profile.location = req.body.location || "";
@@ -151,12 +141,16 @@ export let postUpdateProfile = (req: Request, res: Response, next: NextFunction)
       if (err) {
         if (err.code === 11000) {
           req.flash("errors", { msg: "The email address you have entered is already associated with an account." });
-          return res.redirect("/account");
+          return res.send({
+            err,
+            code: 500
+          });
         }
-        return next(err);
       }
-      req.flash("success", { msg: "Profile information has been updated." });
-      res.redirect("/account");
+      res.send({
+        code: 200,
+        msg: "保存成功"
+      });
     });
   });
 };

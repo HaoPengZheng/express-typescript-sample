@@ -27,7 +27,7 @@ export const signup = (req: Request, res: Response, next: NextFunction) => {
     const user = new User({
         email: req.body.email,
         password: req.body.password
-    });
+    }); 
 
     user.profile.picture = user.gravatar(200);
     User.findOne({ email: req.body.email }, (err, existingUser) => {
@@ -78,7 +78,7 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
                 }
                 if (isMatch) {
                     const token = jwt.sign({data: existingUser}, SECRET, {
-                        expiresIn : 60 * 60 * 1  // 授权时效24小时
+                        expiresIn : 60 * 60 * 24  // 授权时效24小时
                       });
                     res.send({
                         code: 200,
