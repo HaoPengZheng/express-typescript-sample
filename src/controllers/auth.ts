@@ -27,7 +27,7 @@ export const signup = (req: Request, res: Response, next: NextFunction) => {
     const user = new User({
         email: req.body.email,
         password: req.body.password
-    }); 
+    });
 
     user.profile.picture = user.gravatar(200);
     User.findOne({ email: req.body.email }, (err, existingUser) => {

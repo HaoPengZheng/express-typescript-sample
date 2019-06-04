@@ -8,7 +8,7 @@ const request = require("express-validator");
 import builder from "xmlbuilder";
 import { Express } from "express";
 export const getAllEassyList = (req: Request, res: Response, next: NextFunction) => {
-    Essay.find({}, { isDelete: 0, _id: 0, }, (err: any, essayList: EssayDocument) => {
+    Essay.find({}, { isDelete: 0 }, (err: any, essayList: EssayDocument) => {
         res.send({
             essayList
         });
@@ -46,7 +46,23 @@ export const addEssay = (req: Request, res: Response, next: NextFunction) => {
             }
         });
     });
+};
 
+export const getEssayById = (req: Request, res: Response, next: NextFunction) => {
+    const id = req.params.id;
+    Essay.findById(id, (err: any, essay: EssayDocument) => {
+        if (!err) {
+            res.send({
+                essay
+            });
+        } else {
+            res.status(500);
+            res.send({
+                code: 500,
+                msg: "查无信息"
+            });
+        }
+    });
 };
 
 /**
@@ -76,6 +92,7 @@ export const feed = (req: Request, res: Response, next: NextFunction) => {
 
 export default (app: Express) => {
     app.get("/essay", getAllEassyList);
+    app.get("/essay/:id", getEssayById);
     app.post("/essay", addEssay);
     app.get("/feed", feed);
 };
