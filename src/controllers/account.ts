@@ -37,5 +37,5 @@ export let postUpdateProfile = (req: Request, res: Response, next: NextFunction)
   };
 
 export default (app: Express) => {
-    app.post("/account/profile", postUpdateProfile);
+    app.post("/api/account/profile", postUpdateProfile);
 };

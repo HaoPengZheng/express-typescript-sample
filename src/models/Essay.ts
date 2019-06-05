@@ -20,7 +20,7 @@ const essaySchema = new mongoose.Schema({
   email: { type: String, required: true },
   title: { type: String, required: true },
   tag: { type: String },
-  author: { type: Object },
+  author: { type: Object, ref: User },
   time: Date,
   isMarkdown: Boolean,
   content: { type: String, required: true },

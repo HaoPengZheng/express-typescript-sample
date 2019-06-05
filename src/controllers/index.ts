@@ -13,9 +13,9 @@ const initRoute = (app: Express) => {
 
     app.use(jwt({ secret: SECRET }).unless({ path: unlessPath }));
     // auth
-    app.post("/signup", authController.signup);
-    app.post("/login", authController.login);
-    app.get("/user", authController.userinfo);
+    app.post("/api/signup", authController.signup);
+    app.post("/api/login", authController.login);
+    app.get("/api/user", authController.userinfo);
     essayInitRoute(app);
     accountInitRoute(app);
 };

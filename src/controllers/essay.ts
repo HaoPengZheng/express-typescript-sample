@@ -91,8 +91,8 @@ export const feed = (req: Request, res: Response, next: NextFunction) => {
 };
 
 export default (app: Express) => {
-    app.get("/essay", getAllEassyList);
-    app.get("/essay/:id", getEssayById);
-    app.post("/essay", addEssay);
-    app.get("/feed", feed);
+    app.get("/api/essay", getAllEassyList);
+    app.get("/api/essay/:id", getEssayById);
+    app.post("/api/essay", addEssay);
+    app.get("/api/feed", feed);
 };
