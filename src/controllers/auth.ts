@@ -16,6 +16,7 @@ export const signup = (req: Request, res: Response, next: NextFunction) => {
     const errors = req.validationErrors();
 
     if (errors) {
+        res.status(400);
         res.send({
             code: 400,
             msg: "bad request",
