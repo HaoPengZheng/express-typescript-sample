@@ -25,6 +25,7 @@ export const addEssay = (req: Request, res: Response, next: NextFunction) => {
         const essay = new Essay({
             email: req.user.data.email,
             title: req.body.title,
+            cover: req.body.cover,
             author: userInfo,
             time: new Date(),
             isMarkdown: req.body.isMarkdown,

@@ -5,6 +5,7 @@ import { User, UserDocument } from "../models/User";
 export type EssayDocument = mongoose.Document & {
   email: string,
   title: string,
+  cover: string,
   tag: Array<string>,
   author: UserDocument
   time: Date,
@@ -19,6 +20,7 @@ export type EssayDocument = mongoose.Document & {
 const essaySchema = new mongoose.Schema({
   email: { type: String, required: true },
   title: { type: String, required: true },
+  cover: { type: String },
   tag: { type: String },
   author: { type: Object, ref: User },
   time: Date,
