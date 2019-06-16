@@ -5,6 +5,7 @@ import { SECRET } from "../constant";
 const unlessPath = ["/api/signup", "/api/login", "/api/feed", {url: /\api\/essay\/*/, methods: ["GET"]}, {url: "/api/essay", methods: ["GET", "PUT"]}];
 import essayInitRoute from "./essay";
 import accountInitRoute from "./account";
+import staticInitRoute from "./static";
 import { Express } from "express";
 const initRoute = (app: Express) => {
     /**
@@ -18,6 +19,7 @@ const initRoute = (app: Express) => {
     app.get("/api/user", authController.userinfo);
     essayInitRoute(app);
     accountInitRoute(app);
+    staticInitRoute(app);
 };
 
 export default initRoute;
