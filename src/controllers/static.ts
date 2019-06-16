@@ -24,6 +24,7 @@ export const qiniuToken = (req: Request, res: Response, next: NextFunction) => {
 };
 
 export default (app: Express) => {
+  
   app.get("/api/qiniu/token", qiniuToken);
 };
 
