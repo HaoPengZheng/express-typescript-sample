@@ -43,6 +43,6 @@ export const overwriteUpload = (req: Request, res: Response, next: NextFunction)
 
 export default (app: Express) => {
   app.get("/api/qiniu/token", qiniuToken);
-  app.post("/api/qiniu/overwriteToken", qiniuToken);
+  app.post("/api/qiniu/overwriteToken", overwriteUpload);
 };
 
