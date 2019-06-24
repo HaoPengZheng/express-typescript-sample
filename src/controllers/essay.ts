@@ -7,6 +7,7 @@ import { SECRET } from "../constant";
 const request = require("express-validator");
 import builder from "xmlbuilder";
 import { Express } from "express";
+import EssayService from "../Services/EssayService";
 export const getAllEassyList = (req: Request, res: Response, next: NextFunction) => {
     Essay.find({}, { isDelete: 0 }, (err: any, essayList: EssayDocument) => {
         res.send({
@@ -76,19 +77,32 @@ export const getEssayById = (req: Request, res: Response, next: NextFunction) =>
 
 export const feed = (req: Request, res: Response, next: NextFunction) => {
 
-    const rss = builder.create("rss");
-    rss.att("version", "2.0");
-    const channel = rss.ele("channel");
-    for (let i = 1; i <= 5; i++) {
-        const item = channel.ele("item");
-        item.att("x", i);
-        item.att("y", i * i);
-        item.ele("title", {}, "菜鸟教程首页");
-        item.ele("link", {}, "http://www.runoob.com");
-        item.ele("description", {}, "免费编程教程");
-    }
-    const xml = rss.end({ pretty: true });
-    res.set("Content-type", "application/rss+xml").send(xml);
+    // const rss = builder.create("rss");
+    // rss.att("version", "2.0");
+    // const channel = rss.ele("channel");
+    // for (let i = 1; i <= 5; i++) {
+    //     const item = channel.ele("item");
+    //     item.att("x", i);
+    //     item.att("y", i * i);
+    //     item.ele("title", {}, "菜鸟教程首页");
+    //     item.ele("link", {}, "http://www.runoob.com");
+    //     item.ele("description", {}, "免费编程教程");
+    // }
+    // const xml = rss.end({ pretty: true });
+    // res.set("Content-type", "application/rss+xml").send(xml);
+    EssayService.getEssayForRssFeed().then(data => {
+        const rss = builder.create("rss");
+        rss.att("version", "2.0");
+        const channel = rss.ele("channel");
+        data.forEach(essay => {
+            const item = channel.ele("item");
+            item.ele("title", {}, essay.title);
+            item.ele("link", {}, `http://haopengzh.cn/essay/${essay._id}`);
+            item.ele("description", {}, essay.title);
+        });
+        const xml = rss.end({ pretty: true });
+        res.set("Content-type", "application/rss+xml").send(xml);
+    });
 };
 
 export default (app: Express) => {
