@@ -31,8 +31,8 @@ export const addEssay = (req: Request, res: Response, next: NextFunction) => {
             time: new Date(),
             isMarkdown: req.body.isMarkdown,
             content: req.body.content,
-            love: req.body.love,
-            read: req.body.read
+            love: 0,
+            read: 0
         });
         essay.save((err) => {
             if (!err) {
