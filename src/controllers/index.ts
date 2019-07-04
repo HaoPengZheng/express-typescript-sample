@@ -21,7 +21,7 @@ const initRoute = (app: Express) => {
     essayInitRoute(app);
     accountInitRoute(app);
     staticInitRoute(app);
-    oauth2InitRoute(app)
+    oauth2InitRoute(app);
 };
 
 export default initRoute;
