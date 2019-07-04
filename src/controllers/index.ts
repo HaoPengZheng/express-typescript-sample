@@ -2,7 +2,12 @@
 import * as authController from "./auth";
 const jwt = require("express-jwt");
 import { SECRET } from "../constant";
-const unlessPath = ["/api/signup", "/api/login", "/api/feed", {url: /\api\/essay\/*/, methods: ["GET"]}, {url: "/api/essay", methods: ["GET", "PUT"]}];
+const unlessPath = ["/api/signup",
+    "/api/login", "/api/feed",
+    { url: /\api\/oauth2\/*/, methods: ["GET", "POST"]},
+    { url: /\api\/essay\/*/, methods: ["GET"] },
+    { url: "/api/essay", methods: ["GET", "PUT"] }
+];
 import essayInitRoute from "./essay";
 import accountInitRoute from "./account";
 import staticInitRoute from "./static";
