@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from "express";
 const jwt = require("jsonwebtoken");
 import { SECRET } from "../constant";
 const request = require("express-validator");
+const http = require("request");
 /**
  * POST /signup
  * Create a new local account.

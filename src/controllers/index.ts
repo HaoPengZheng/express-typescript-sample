@@ -6,6 +6,7 @@ const unlessPath = ["/api/signup", "/api/login", "/api/feed", {url: /\api\/essay
 import essayInitRoute from "./essay";
 import accountInitRoute from "./account";
 import staticInitRoute from "./static";
+import oauth2InitRoute from "./oauth2";
 import { Express } from "express";
 const initRoute = (app: Express) => {
     /**
@@ -20,6 +21,7 @@ const initRoute = (app: Express) => {
     essayInitRoute(app);
     accountInitRoute(app);
     staticInitRoute(app);
+    oauth2InitRoute(app)
 };
 
 export default initRoute;
